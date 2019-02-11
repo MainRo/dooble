@@ -11,7 +11,7 @@ def render_to_file(marble, filename):
     fig, ax = plt.subplots()
 
     layer_index = 0
-    for layer in marble.layers:
+    for layer in reversed(marble.layers):
 
         if type(layer) is Observable:
             observable = layer
@@ -32,7 +32,7 @@ def render_to_file(marble, filename):
             for item in observable.items:
                 x.append(item.at)
                 y.append(layer_index)
-            ax.scatter(x, y, s=area, c=None, edgecolors='navy', alpha=1.0)
+            ax.scatter(x, y, s=area, c=None, edgecolors='navy', color='tab:blue', alpha=1.0)
 
             # items text
             for item in observable.items:
@@ -41,10 +41,10 @@ def render_to_file(marble, filename):
         elif type(layer) is Operator:
             operator = layer
             y = layer_index - 0.1
-            ax.plot([operator.start, operator.end], [layer_index, layer_index], color='tab:blue', linestyle=':')
+            #ax.plot([operator.start, operator.end], [layer_index, layer_index], color='tab:blue', linestyle=':')
             ax.add_patch(Rectangle((operator.start, y), operator.end-operator.start, 0.2, alpha=1, edgecolor='black', facecolor='none'))
             #ax.add_patch(Rectangle((operator.start, layer_index), operator.end, layer_index+0.2, alpha=1, edgecolor='black', facecolor='none'))
-            ax.text(operator.start+ (operator.end-operator.start)/2, y, operator.text, horizontalalignment='center', verticalalignment='center')
+            ax.text(operator.start+ (operator.end-operator.start)/2, y + 0.1, operator.text, horizontalalignment='center', verticalalignment='center')
             #ax.text(2.5, y, 'Operator', horizontalalignment='center', verticalalignment='center')
 
         layer_index += 1

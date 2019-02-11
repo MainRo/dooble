@@ -7,7 +7,7 @@ grammar = '''
 
     layer
     =
-    | observable
+    | obs:observable
     | op:operator
     ;
 
@@ -36,5 +36,5 @@ class Idl(object):
         self.model = tatsu.compile(grammar)
 
     def parse(self, text):
-        ast = self.model.parse(text, whitespace='')
+        ast = self.model.parse(text, whitespace='\n')
         return ast

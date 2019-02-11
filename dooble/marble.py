@@ -4,7 +4,7 @@ Item = namedtuple('Item', ['item', 'at'])
 
 
 class Observable(object):
-    def __init__(self, start, end):
+    def __init__(self, start, end = None):
         self.start = start
         self.end = end
         self.items = []
@@ -16,9 +16,14 @@ class Observable(object):
 
     def on_completed_at(self, at):
         self.completed = at
+        self.end = at
 
     def on_error_at(self, at):
         self.error = at
+        self.end = at
+
+    def on_continued_at(self, at):
+        self.end = at
 
 class Operator(object):
     def __init__(self, start, end, text):
