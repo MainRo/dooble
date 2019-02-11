@@ -6,8 +6,8 @@ dooble
 .. image:: https://img.shields.io/pypi/v/dooble.svg
         :target: https://pypi.python.org/pypi/dooble
 
-.. image:: https://img.shields.io/travis/mainro/dooble.svg
-        :target: https://travis-ci.org/mainro/dooble
+.. image:: https://img.shields.io/travis/MainRo/dooble.svg
+        :target: https://travis-ci.org/MainRo/dooble
 
 .. image:: https://readthedocs.org/projects/dooble/badge/?version=latest
         :target: https://dooble.readthedocs.io/en/latest/?badge=latest
