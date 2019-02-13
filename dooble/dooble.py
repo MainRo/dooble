@@ -12,7 +12,8 @@ def create_observable(layer):
         part += 1
         step += 1
 
-    observable = Observable(step, is_child=is_child)
+    start = step if is_child is False else step - 1
+    observable = Observable(start, is_child=is_child)
     for ts in layer[part]:
         if 'ts' in ts and ts['ts'] is not None:
             step += 1
