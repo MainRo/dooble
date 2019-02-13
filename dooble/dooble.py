@@ -10,6 +10,7 @@ def create_observable(layer):
     if layer[part] == '+':
         is_child = True
         part += 1
+        step += 1
 
     observable = Observable(step, is_child=is_child)
     for ts in layer[part]:
@@ -57,6 +58,6 @@ def create_marble_from_ast(ast):
             marble.add_observable(create_observable(layer['obs']))
         elif 'op' in layer and layer['op'] is not None:
             marble.add_operator(create_operator(layer['op']))
-            
+
     marble.build()
     return marble
