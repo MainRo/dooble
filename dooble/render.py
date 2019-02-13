@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import numpy as np
-from dooble.marble import Operator, Observable
+from dooble.marble import Operator, Observable, Item
 
 area = np.pi*80
 end_area = np.pi*50
@@ -10,13 +10,24 @@ end_area = np.pi*50
 def render_to_file(marble, filename):
     fig, ax = plt.subplots()
 
+    def plt_y(y):
+        return len(marble.layers) - y - 1
+
+    # higher observable links
+    for link in marble.higher_order_links:
+        ax.plot(
+            [link.from_x, link.to_x],
+            [plt_y(link.from_y), plt_y(link.to_y)],
+            color='tab:blue', linestyle='-')
+
     layer_index = 0
     for layer in reversed(marble.layers):
 
         if type(layer) is Observable:
             observable = layer
             # time line
-            ax.plot([observable.start, observable.end], [layer_index, layer_index], color='tab:blue', linestyle=':')
+            ax.plot([observable.start, observable.end], [layer_index, layer_index], color='tab:blue', linestyle='-')
+
 
             # end marker
             if observable.completed is not None:
@@ -36,16 +47,14 @@ def render_to_file(marble, filename):
 
             # items text
             for item in observable.items:
-                ax.text(item.at, layer_index, str(item.item), horizontalalignment='center', verticalalignment='center')
+                text = str(item.item) if type(item) is Item else ''
+                ax.text(item.at, layer_index, text, horizontalalignment='center', verticalalignment='center')
 
         elif type(layer) is Operator:
             operator = layer
             y = layer_index - 0.1
-            #ax.plot([operator.start, operator.end], [layer_index, layer_index], color='tab:blue', linestyle=':')
-            ax.add_patch(Rectangle((operator.start, y), operator.end-operator.start, 0.2, alpha=1, edgecolor='black', facecolor='none'))
-            #ax.add_patch(Rectangle((operator.start, layer_index), operator.end, layer_index+0.2, alpha=1, edgecolor='black', facecolor='none'))
+            ax.add_patch(Rectangle((operator.start, y), operator.end-operator.start, 0.3, alpha=1, edgecolor='black', facecolor='none'))
             ax.text(operator.start+ (operator.end-operator.start)/2, y + 0.1, operator.text, horizontalalignment='center', verticalalignment='center')
-            #ax.text(2.5, y, 'Operator', horizontalalignment='center', verticalalignment='center')
 
         layer_index += 1
 

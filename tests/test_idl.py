@@ -173,8 +173,50 @@ class TestIdl(unittest.TestCase):
             '[',
             ' map(i: i*2) ',
             ']'
-            ], 
+            ],
             'obs': None}
+        ]
+
+
+        idl = Idl()
+        ast = idl.parse(text)
+        print(ast)
+        self.assertEqual(expected_result, ast)
+
+    def test_higer_order_observable(self):
+        text = '-+->'
+
+        expected_result = [
+            { 'obs' : [
+                [],
+                [
+                    {'ts': '-', 'item': None},
+                    {'ts': None, 'item': '+'},
+                    {'ts': '-', 'item': None},
+                ],
+                '>'
+            ], 'op': None}
+        ]
+
+
+        idl = Idl()
+        ast = idl.parse(text)
+        print(ast)
+        self.assertEqual(expected_result, ast)
+
+    def test_child_observable(self):
+        text = '+-a->'
+
+        expected_result = [
+            { 'obs' : [
+                [], '+',
+                [
+                    {'ts': '-', 'item': None},
+                    {'ts': None, 'item': 'a'},
+                    {'ts': '-', 'item': None},
+                ],
+                '>'
+            ], 'op': None}
         ]
 
 

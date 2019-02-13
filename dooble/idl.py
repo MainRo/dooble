@@ -12,8 +12,12 @@ grammar = '''
     ;
 
 
-    observable = {skipspan}* {lifetime}* completion ;
+    observable = {skipspan}* [kind] {lifetime}* completion ;
     operator = '[' description ']' ;
+
+    kind = '+' | name ;
+
+    name = /[a-z]/ ;
 
     lifetime 
     =
@@ -25,7 +29,8 @@ grammar = '''
 
     skipspan = ' ' ;
     timespan = '-' ;
-    item = /[a-zA-Z0-9]+/ ;
+    item = /[a-zA-Z0-9+]+/ ;
+
 
     description = /[a-zA-Z0-9,:+*() ]+/ ;
 '''
