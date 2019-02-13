@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import argparse
 from dooble.idl import Idl
 from dooble.dooble import create_marble_from_ast
@@ -10,12 +8,12 @@ def parse_arguments():
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
-        '--input', 
-        help='marble diagram definition file', 
+        '--input',
+        help='marble diagram definition file',
         required=True)
     parser.add_argument(
-        '--output', 
-        help='file where rendered diagram will be saved', 
+        '--output',
+        help='file where rendered diagram will be saved',
         required=True)
     return parser.parse_args()
 
@@ -32,7 +30,3 @@ def main():
     #print(ast)
     marble = create_marble_from_ast(ast)
     render_to_file(marble, args.output)
-
-
-if __name__ == '__main__':
-    main()
