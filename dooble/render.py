@@ -20,43 +20,48 @@ def render_to_file(marble, filename):
             [plt_y(link.from_y), plt_y(link.to_y)],
             color='tab:blue', linestyle='-')
 
-    layer_index = 0
-    for layer in reversed(marble.layers):
-
+    for layer_index, layer in enumerate(marble.layers):
         if type(layer) is Observable:
             observable = layer
             # time line
-            ax.plot([observable.start, observable.end], [layer_index, layer_index], color='tab:blue', linestyle='-')
+            ax.plot(
+                [observable.start, observable.end],
+                [plt_y(layer_index), plt_y(layer_index)],
+                color='tab:blue', linestyle='-')
 
 
             # end marker
             if observable.completed is not None:
-                ax.scatter([observable.completed], [layer_index], s=end_area, color='tab:blue', marker='|')
+                ax.scatter(
+                    [observable.completed], [plt_y(layer_index)],
+                    s=end_area, color='tab:blue', marker='|')
             elif observable.error is not None:
-                ax.scatter([observable.error], [layer_index], s=end_area, color='tab:blue', marker='x')
+                ax.scatter(
+                    [observable.error], [plt_y(layer_index)], 
+                    s=end_area, color='tab:blue', marker='x')
             else:
-                ax.scatter([observable.end], [layer_index], s=end_area, color='tab:blue', marker='>')
+                ax.scatter(
+                    [observable.end], [plt_y(layer_index)],
+                    s=end_area, color='tab:blue', marker='>')
 
             # items
             x = []
             y = []
             for item in observable.items:
                 x.append(item.at)
-                y.append(layer_index)
+                y.append(plt_y(layer_index))
             ax.scatter(x, y, s=area, c=None, edgecolors='navy', color='tab:blue', alpha=1.0)
 
             # items text
             for item in observable.items:
                 text = str(item.item) if type(item) is Item else ''
-                ax.text(item.at, layer_index, text, horizontalalignment='center', verticalalignment='center')
+                ax.text(item.at, plt_y(layer_index), text, horizontalalignment='center', verticalalignment='center')
 
         elif type(layer) is Operator:
             operator = layer
-            y = layer_index - 0.1
+            y = plt_y(layer_index) - 0.1
             ax.add_patch(Rectangle((operator.start, y), operator.end-operator.start, 0.3, alpha=1, edgecolor='black', facecolor='none'))
             ax.text(operator.start+ (operator.end-operator.start)/2, y + 0.1, operator.text, horizontalalignment='center', verticalalignment='center')
-
-        layer_index += 1
 
     ax.set_axis_off()
     plt.savefig(filename)
