@@ -2,18 +2,29 @@ from dooble.marble import Marble, Observable, Operator
 
 
 def create_observable(layer):
-    step = 0
+    part = 0
+    step = len(layer[part])
 
-    observable = Observable(step)
-    for ts in layer[1]:
+    part += 1
+    is_child = False
+    if layer[part] == '+':
+        is_child = True
+        part += 1
+
+    observable = Observable(step, is_child=is_child)
+    for ts in layer[part]:
         if 'ts' in ts and ts['ts'] is not None:
             step += 1
         else:
             item = ts['item']
-            observable.on_next_at(item, step)
+            if item == '+':
+                observable.on_observable_at(step)
+            else:
+                observable.on_next_at(item, step)
             step += len(item)
 
-    completion = layer[2]
+    part += 1
+    completion = layer[part]
 
     if completion == '|':
         observable.on_completed_at(step)
@@ -46,5 +57,6 @@ def create_marble_from_ast(ast):
             marble.add_observable(create_observable(layer['obs']))
         elif 'op' in layer and layer['op'] is not None:
             marble.add_operator(create_operator(layer['op']))
-
+            
+    marble.build()
     return marble
