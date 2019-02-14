@@ -6,13 +6,17 @@ Link = namedtuple('Link', [ 'from_x', 'from_y', 'to_x', 'to_y'])
 
 
 class Observable(object):
-    def __init__(self, start, end=None, is_child=False):
+    def __init__(self, start, is_child=False):
+        self.label = None
         self.start = start
-        self.end = end
+        self.end = start
         self.is_child = is_child
         self.items = []
         self.completed = None
         self.error = None
+
+    def set_label(self, label):
+        self.label = label
 
     def on_next_at(self, item, at):
         self.items.append(Item(item, at))

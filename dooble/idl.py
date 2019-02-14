@@ -12,14 +12,14 @@ grammar = '''
     ;
 
 
-    observable = {skipspan}* [kind] {lifetime}* completion ;
+    observable = {skipspan}* [prefix] {lifetime}* completion ;
     operator = '[' description ']' ;
 
-    kind = '+' | name ;
+    prefix = '+' | label ;
 
-    name = /[a-z]/ ;
+    label = /[a-z]/ ;
 
-    lifetime 
+    lifetime
     =
     | ts:timespan
     | item:item

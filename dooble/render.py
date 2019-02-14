@@ -27,8 +27,8 @@ def render_to_file(marble, filename):
             ax.plot(
                 [observable.start, observable.end],
                 [plt_y(layer_index), plt_y(layer_index)],
-                color='tab:blue', linestyle='-')
-
+                color='tab:blue', linestyle='-',
+                zorder=0)
 
             # end marker
             if observable.completed is not None:
@@ -51,6 +51,11 @@ def render_to_file(marble, filename):
                 x.append(item.at)
                 y.append(plt_y(layer_index))
             ax.scatter(x, y, s=area, c=None, edgecolors='navy', color='tab:blue', alpha=1.0)
+
+            # label
+            if observable.label is not None:
+                ax.scatter([observable.start], [plt_y(layer_index)], s=area, c=None, edgecolors='navy', color='tab:red', alpha=1.0)
+                ax.text(observable.start, plt_y(layer_index), observable.label, horizontalalignment='center', verticalalignment='center')
 
             # items text
             for item in observable.items:
