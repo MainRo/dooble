@@ -19,7 +19,7 @@ def render_to_file(marble, filename, theme):
             [link.from_x, link.to_x],
             [plt_y(link.from_y), plt_y(link.to_y)],
             color=theme.timeline_color, linestyle='-',
-            zorder=0)
+            linewidth='2', zorder=0)
 
     for layer_index, layer in enumerate(marble.layers):
         if type(layer) is Observable:
