@@ -1,4 +1,42 @@
+from collections import namedtuple
 from dooble.marble import Marble, Observable, Operator
+
+
+Theme = namedtuple('Theme', [
+    'timeline_color',
+    'item_color',
+    'label_color',
+    'operator_color',
+    'operator_edge_color',
+])
+
+default_theme = Theme(
+    timeline_color=(
+        float(0x3F) / 0xFF, 
+        float(0x68) / 0xFF,
+        float(0x89) / 0xFF,
+    ),
+    item_color=(
+        float(0x84) / 0xFF, 
+        float(0xB4) / 0xFF,
+        float(0xDB) / 0xFF,
+    ),
+    label_color=(
+        float(0x91) / 0xFF, 
+        float(0x8F) / 0xFF,
+        float(0xE0) / 0xFF,
+    ),
+    operator_color=(
+        float(0x91) / 0xFF,
+        float(0x8F) / 0xFF,
+        float(0xE0) / 0xFF,
+    ),
+    operator_edge_color=(
+        float(0x48) / 0xFF,
+        float(0x49) / 0xFF,
+        float(0x91) / 0xFF,
+    ),
+)
 
 
 def create_observable(layer):

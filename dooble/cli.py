@@ -1,6 +1,6 @@
 import argparse
 from dooble.idl import Idl
-from dooble.dooble import create_marble_from_ast
+from dooble.dooble import create_marble_from_ast, default_theme
 from dooble.render import render_to_file
 
 
@@ -29,4 +29,4 @@ def main():
 
     #print(ast)
     marble = create_marble_from_ast(ast)
-    render_to_file(marble, args.output)
+    render_to_file(marble, args.output, default_theme)

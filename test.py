@@ -1,5 +1,8 @@
 from dooble.marble import Observable, Operator, Marble
 from dooble.render import render_to_file
+from dooble.dooble import default_theme
+
+
 marble = Marble()
 
 # continuing observable
@@ -48,4 +51,4 @@ obs.on_completed_at(4)
 marble.add_observable(obs)
 
 marble.build()
-render_to_file(marble, '/tmp/marble.png')
+render_to_file(marble, '/tmp/marble.png', default_theme)
