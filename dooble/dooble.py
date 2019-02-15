@@ -4,6 +4,7 @@ from dooble.marble import Marble, Observable, Operator
 
 Theme = namedtuple('Theme', [
     'timeline_color',
+    'emission_color',
     'item_color',
     'label_color',
     'operator_color',
@@ -12,29 +13,34 @@ Theme = namedtuple('Theme', [
 
 default_theme = Theme(
     timeline_color=(
-        float(0x3F) / 0xFF, 
-        float(0x68) / 0xFF,
-        float(0x89) / 0xFF,
+        float(0x33) / 0xFF, 
+        float(0x7A) / 0xFF,
+        float(0xB7) / 0xFF,
+    ),
+    emission_color=(
+        float(0xC0) / 0xFF, 
+        float(0xC0) / 0xFF,
+        float(0xC0) / 0xFF,
     ),
     item_color=(
-        float(0x84) / 0xFF, 
-        float(0xB4) / 0xFF,
-        float(0xDB) / 0xFF,
+        float(0xE0) / 0xFF, 
+        float(0xE8) / 0xFF,
+        float(0xFF) / 0xFF,
     ),
     label_color=(
-        float(0x91) / 0xFF, 
-        float(0x8F) / 0xFF,
-        float(0xE0) / 0xFF,
+        float(0xF0) / 0xFF, 
+        float(0xF0) / 0xFF,
+        float(0xF0) / 0xFF,
     ),
     operator_color=(
-        float(0x91) / 0xFF,
-        float(0x8F) / 0xFF,
-        float(0xE0) / 0xFF,
+        float(0xF0) / 0xFF,
+        float(0xF0) / 0xFF,
+        float(0xF0) / 0xFF,
     ),
     operator_edge_color=(
-        float(0x48) / 0xFF,
-        float(0x49) / 0xFF,
-        float(0x91) / 0xFF,
+        float(0x33) / 0xFF,
+        float(0x7A) / 0xFF,
+        float(0xB7) / 0xFF,
     ),
 )
 
@@ -45,13 +51,20 @@ def create_observable(layer):
 
     part += 1
     is_child = False
+    label = None
     if layer[part] == '+':
         is_child = True
         part += 1
         step += 1
+    elif type(layer[part]) is str:
+        label = layer[part]
+        part += 1
 
     start = step if is_child is False else step - 1
     observable = Observable(start, is_child=is_child)
+    if label is not None:
+        observable.set_label(label)
+
     for ts in layer[part]:
         if 'ts' in ts and ts['ts'] is not None:
             step += 1

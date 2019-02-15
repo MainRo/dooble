@@ -26,11 +26,11 @@ def render_to_file(marble, filename, theme):
         ax.plot(
             [link.from_x, link.to_x],
             [plt_y(link.from_y), plt_y(link.to_y)],
-            color=theme.timeline_color, linestyle=':',
+            color=theme.emission_color, linestyle=':',
             linewidth='1', zorder=0)
         ax.scatter(
             [link.to_x], [plt_y(link.to_y) + 0.25],
-            color=theme.timeline_color, marker='v', linewidth='1')
+            color=theme.emission_color, marker='v', linewidth='1')
 
     for layer_index, layer in enumerate(marble.layers):
         if type(layer) is Observable:

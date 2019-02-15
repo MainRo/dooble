@@ -117,8 +117,11 @@ class Marble(object):
                 items = []
                 top_layer = layer_index
             elif type(layer) is Observable:
-                for item in layer.items:
-                    items.append((item.at, layer_index))
+                if layer.label is not None:
+                    items.append((layer.start, layer_index))
+                else:
+                    for item in layer.items:
+                        items.append((item.at, layer_index))
 
         links.extend(emission_links(top_layer, None, items))
         return links
