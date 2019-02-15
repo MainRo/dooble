@@ -47,6 +47,7 @@ class Marble(object):
     def __init__(self):
         self.layers = []
         self.higher_order_links = []
+        self.emission_links = []
         return
 
     def add_observable(self, observable):
@@ -91,5 +92,37 @@ class Marble(object):
         links.extend(nearest_links(parents, childs))
         return links
 
+    def _compute_emmision_links(self):
+        def emission_links(top_layer, bottom_layer, items):
+            links = []
+            for item in items:                
+                if top_layer is not None:
+                    links.append(Link(
+                        from_x=item[0], from_y=top_layer,
+                        to_x=item[0], to_y=item[1],
+                    ))
+                if bottom_layer is not None:
+                    links.append(Link(
+                        from_x=item[0], from_y=item[1],
+                        to_x=item[0], to_y=bottom_layer,
+                    ))
+            return links
+
+        top_layer = None
+        items = []
+        links = []
+        for layer_index, layer in enumerate(self.layers):
+            if type(layer) is Operator:
+                links.extend(emission_links(top_layer, layer_index, items))
+                items = []
+                top_layer = layer_index
+            elif type(layer) is Observable:
+                for item in layer.items:
+                    items.append((item.at, layer_index))
+
+        links.extend(emission_links(top_layer, None, items))
+        return links
+
     def build(self):
         self.higher_order_links = self._compute_higher_order_links()
+        self.emission_links = self._compute_emmision_links()

@@ -13,13 +13,24 @@ def render_to_file(marble, filename, theme):
     def plt_y(y):
         return len(marble.layers) - y - 1
 
-    # higher observable links
+    # higher observable links    
     for link in marble.higher_order_links:
         ax.plot(
             [link.from_x, link.to_x],
             [plt_y(link.from_y), plt_y(link.to_y)],
             color=theme.timeline_color, linestyle='-',
             linewidth='2', zorder=0)
+
+    # emission links
+    for link in marble.emission_links:
+        ax.plot(
+            [link.from_x, link.to_x],
+            [plt_y(link.from_y), plt_y(link.to_y)],
+            color=theme.timeline_color, linestyle=':',
+            linewidth='1', zorder=0)
+        ax.scatter(
+            [link.to_x], [plt_y(link.to_y) + 0.25],
+            color=theme.timeline_color, marker='v', linewidth='1')
 
     for layer_index, layer in enumerate(marble.layers):
         if type(layer) is Observable:
@@ -70,14 +81,14 @@ def render_to_file(marble, filename, theme):
 
         elif type(layer) is Operator:
             operator = layer
-            y = plt_y(layer_index) - 0.15
+            y = plt_y(layer_index) - 0.1
             ax.add_patch(Rectangle(
-                (operator.start, y), operator.end-operator.start, 0.4,
+                (operator.start, y), operator.end-operator.start, 0.25,
                 alpha=1, edgecolor=theme.operator_edge_color,
                 facecolor=theme.operator_color,
                 linewidth='2'))
             ax.text(
-                operator.start + (operator.end-operator.start)/2, y + 0.15,
+                operator.start + (operator.end-operator.start)/2, y + 0.1,
                 operator.text,
                 horizontalalignment='center', verticalalignment='center')
 
