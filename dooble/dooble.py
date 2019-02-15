@@ -58,6 +58,7 @@ def create_observable(layer):
         step += 1
     elif type(layer[part]) is str:
         label = layer[part]
+        step += 1
         part += 1
 
     start = step if is_child is False else step - 1
