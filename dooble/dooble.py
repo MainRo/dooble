@@ -13,24 +13,24 @@ Theme = namedtuple('Theme', [
 
 default_theme = Theme(
     timeline_color=(
-        float(0x33) / 0xFF, 
+        float(0x33) / 0xFF,
         float(0x7A) / 0xFF,
         float(0xB7) / 0xFF,
     ),
     emission_color=(
-        float(0xC0) / 0xFF, 
+        float(0xC0) / 0xFF,
         float(0xC0) / 0xFF,
         float(0xC0) / 0xFF,
     ),
     item_color=(
-        float(0xE0) / 0xFF, 
+        float(0xE0) / 0xFF,
         float(0xE8) / 0xFF,
         float(0xFF) / 0xFF,
     ),
     label_color=(
-        float(0xF0) / 0xFF, 
-        float(0xF0) / 0xFF,
-        float(0xF0) / 0xFF,
+        float(0x33) / 0xFF,
+        float(0x7A) / 0xFF,
+        float(0xB7) / 0xFF,
     ),
     operator_color=(
         float(0xF0) / 0xFF,
