@@ -61,7 +61,7 @@ def create_observable(layer):
         step += 1
         part += 1
 
-    start = step if is_child is False else step - 1
+    start = step - 1 if is_child is True or label is not None else step
     observable = Observable(start, is_child=is_child)
     if label is not None:
         observable.set_label(label)
