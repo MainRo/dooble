@@ -8,7 +8,8 @@ end_area = np.pi*50
 
 
 def render_to_file(marble, filename, theme):
-    fig, ax = plt.subplots()
+    height = len(marble.layers)
+    fig, ax = plt.subplots(figsize=(6.4, height), dpi=100)
 
     def plt_y(y):
         return len(marble.layers) - y - 1
@@ -93,4 +94,4 @@ def render_to_file(marble, filename, theme):
                 horizontalalignment='center', verticalalignment='center')
 
     ax.set_axis_off()
-    plt.savefig(filename)
+    plt.savefig(filename, dpi=fig.dpi)
