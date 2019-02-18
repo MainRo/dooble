@@ -8,7 +8,7 @@ end_area = np.pi*50
 
 
 def render_to_file(marble, filename, theme):
-    height = len(marble.layers)
+    height = len(marble.layers) * 0.7
     fig, ax = plt.subplots(figsize=(6.4, height), dpi=100)
 
     def plt_y(y):
@@ -30,7 +30,7 @@ def render_to_file(marble, filename, theme):
             color=theme.emission_color, linestyle=':',
             linewidth='1', zorder=0)
         ax.scatter(
-            [link.to_x], [plt_y(link.to_y) + 0.25],
+            [link.to_x], [plt_y(link.to_y) + 0.3],
             color=theme.emission_color, marker='v', linewidth='1')
 
     for layer_index, layer in enumerate(marble.layers):
@@ -82,14 +82,14 @@ def render_to_file(marble, filename, theme):
 
         elif type(layer) is Operator:
             operator = layer
-            y = plt_y(layer_index) - 0.1
+            y = plt_y(layer_index) - 0.15
             ax.add_patch(Rectangle(
-                (operator.start, y), operator.end-operator.start, 0.25,
+                (operator.start, y), operator.end-operator.start, 0.35,
                 alpha=1, edgecolor=theme.operator_edge_color,
                 facecolor=theme.operator_color,
                 linewidth='2'))
             ax.text(
-                operator.start + (operator.end-operator.start)/2, y + 0.1,
+                operator.start + (operator.end-operator.start)/2, y + 0.15,
                 operator.text,
                 horizontalalignment='center', verticalalignment='center')
 
