@@ -69,3 +69,23 @@ save this text in a file named *window.txt* and then render it to an image:
 The generated image looks like this:
 
 .. image:: examples/window.png
+
+For operators that take several observables as input, it is possible to label
+them:
+
+.. code::
+
+        --1--2--3--*
+                 a-7-8-|
+        [   catch(a)   ]
+        --1--2--3--7-8-|
+
+save this text in a file named *catch.txt* and then render it to an image:
+
+.. code:: console
+
+        dooble --input catch.txt --output catch.png
+
+The generated image looks like this:
+
+.. image:: examples/catch.png
