@@ -29,7 +29,7 @@ A sphinx plugin is also available:
 Usage
 ------
 
-The text grammar allows to easilly define observables and operators. The map
+The text grammar allows to easilly define *observables* and *operators*. The map
 operator with an input observable and an output observable is described the
 following way:
 
@@ -45,5 +45,27 @@ save this text in a file named *map.txt* and then render it to an image:
 
         dooble --input map.txt --output map.png
 
+The generated image looks like this:
+
 .. image:: examples/map.png
 
+
+*Higher order observables* can also be documented easilly:
+
+.. code::
+
+        --a-b-c---d-e-f-->
+        [     window     ]
+        --+-------+------>
+                  +d-e-f-|
+          +a-b-c-|
+
+save this text in a file named *window.txt* and then render it to an image:
+
+.. code:: console
+
+        dooble --input window.txt --output window.png
+
+The generated image looks like this:
+
+.. image:: examples/window.png
