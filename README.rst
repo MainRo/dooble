@@ -9,29 +9,41 @@ dooble
 .. image:: https://img.shields.io/travis/MainRo/dooble.svg
         :target: https://travis-ci.org/MainRo/dooble
 
-.. image:: https://readthedocs.org/projects/dooble/badge/?version=latest
-        :target: https://dooble.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
 
+Dooble is a marble diagram generator from text. It eases the documentation of
+ReactiveX standard and custom operators, in a consitent way.
 
+Installation
+-------------
 
+.. code:: python
 
-a marble diagram generator
+        pip install dooble
 
+A sphinx plugin is also available:
 
-* Free software: MIT license
-* Documentation: https://dooble.readthedocs.io.
+.. code:: python
 
+        pip install sphinxcontrib-dooble
 
-Features
---------
+Usage
+------
 
-* TODO
+The text grammar allows to easilly define observables and operators. The map
+operator with an input observable and an output observable is described the
+following way:
 
-Credits
--------
+.. code::
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+        --1--2--3--4-->
+        [ map(i: i*2) ]
+        --2--4--6--8-->
 
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+save this text in a file named *map.txt* and then render it to an image:
+
+.. code:: console
+
+        dooble --input map.txt --output map.png
+
+.. image:: examples/map.png
+
