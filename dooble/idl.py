@@ -29,10 +29,10 @@ grammar = '''
 
     skipspan = ' ' ;
     timespan = '-' ;
-    item = /[a-zA-Z0-9+]+/ ;
+    item = /[a-zA-Z0-9+.,]+/ ;
 
 
-    description = /[a-zA-Z0-9,:+*() ]+/ ;
+    description = /[a-zA-Z0-9,:+*() <>_]+/ ;
 '''
 
 

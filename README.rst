@@ -134,7 +134,7 @@ The full grammar is the following one (in tatsu peudo ebnf syntax):
 
         skipspan = ' ' ;
         timespan = '-' ;
-        item = /[a-zA-Z0-9+]+/ ;
+        item = /[a-zA-Z0-9+.,]+/ ;
 
-        description = /[a-zA-Z0-9,:+*() ]+/ ;
+        description = /[a-zA-Z0-9,:+*() <>_]+/ ;
 
