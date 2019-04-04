@@ -95,3 +95,4 @@ def render_to_file(marble, filename, theme):
 
     ax.set_axis_off()
     plt.savefig(filename, dpi=fig.dpi)
+    plt.close()
