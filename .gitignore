@@ -92,6 +92,9 @@ ENV/
 .spyderproject
 .spyproject
 
+# IDEA project settings
+.idea
+
 # Rope project settings
 .ropeproject
 
@@ -101,3 +104,6 @@ ENV/
 # mypy
 .mypy_cache/
 .vscode
+
+# MacOS
+.DS_Store
