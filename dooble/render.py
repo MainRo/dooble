@@ -22,16 +22,27 @@ def render_to_file(marble, filename, theme):
             color=theme.timeline_color, linestyle='-',
             linewidth='2', zorder=0)
 
-    # emission links
-    for link in marble.emission_links:
+    # item links
+    for link in marble.item_links:
         ax.plot(
             [link.from_x, link.to_x],
             [plt_y(link.from_y), plt_y(link.to_y)],
-            color=theme.emission_color, linestyle=':',
+            color=theme.item_link_color, linestyle=':',
             linewidth='1', zorder=0)
         ax.scatter(
             [link.to_x], [plt_y(link.to_y) + 0.3],
-            color=theme.emission_color, marker='v', linewidth='1')
+            color=theme.item_link_color, marker='v', linewidth='1')
+
+    # label links
+    for link in marble.label_links:
+        ax.plot(
+            [link.from_x, link.to_x],
+            [plt_y(link.from_y), plt_y(link.to_y)],
+            color=theme.label_link_color, linestyle='--',
+            linewidth='1', zorder=0)
+        ax.scatter(
+            [link.to_x], [plt_y(link.to_y) + 0.3],
+            color=theme.label_link_color, marker='v', linewidth='1')
 
     for layer_index, layer in enumerate(marble.layers):
         if type(layer) is Observable:
