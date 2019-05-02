@@ -130,7 +130,7 @@ The full grammar is the following one (in tatsu pseudo ebnf syntax):
         | item:item
         ;
 
-        completion = /[>|\*]/ ;
+        completion = /[>|*]/ ;
 
         skipspan = ' ' ;
         timespan = '-' ;
