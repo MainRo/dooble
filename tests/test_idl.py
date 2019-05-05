@@ -4,6 +4,7 @@ from dooble.idl import Idl
 
 
 class TestIdl(unittest.TestCase):
+
     def test_empty_observable(self):
         text = '----->'
 
@@ -11,14 +12,14 @@ class TestIdl(unittest.TestCase):
             {'obs': [
                 [],
                 [ 
-                    {'ts': '-', 'item': None},
-                    {'ts': '-', 'item': None},
-                    {'ts': '-', 'item': None},
-                    {'ts': '-', 'item': None},
-                    {'ts': '-', 'item': None},
+                    {'ts': '-'},
+                    {'ts': '-'},
+                    {'ts': '-'},
+                    {'ts': '-'},
+                    {'ts': '-'},
                 ],
                 '>'
-            ], 'op': None}
+            ]}
         ]
 
         idl = Idl()
@@ -29,22 +30,21 @@ class TestIdl(unittest.TestCase):
         text = '-a-b-c-->'
 
         expected_result = [
-            { 'obs': [
+            {'obs': [
                 [], 
                 [ 
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'a'},
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'b'},
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'c'},
-                    {'ts': '-', 'item': None},
-                    {'ts': '-', 'item': None},
+                    {'ts': '-'},
+                    {'item': 'a'},
+                    {'ts': '-'},
+                    {'item': 'b'},
+                    {'ts': '-'},
+                    {'item': 'c'},
+                    {'ts': '-'},
+                    {'ts': '-'},
                 ],
                 '>'
-            ], 'op': None}
+            ]}
         ]
-
 
         idl = Idl()
         ast = idl.parse(text)
@@ -55,74 +55,70 @@ class TestIdl(unittest.TestCase):
         text = '  -a-b-c-->'
 
         expected_result = [
-            { 'obs': [
+            {'obs': [
                 [' ', ' '],
                 [ 
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'a'},
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'b'},
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'c'},
-                    {'ts': '-', 'item': None},
-                    {'ts': '-', 'item': None},
+                    {'ts': '-'},
+                    {'item': 'a'},
+                    {'ts': '-'},
+                    {'item': 'b'},
+                    {'ts': '-'},
+                    {'item': 'c'},
+                    {'ts': '-'},
+                    {'ts': '-'},
                 ],
                 '>'
-            ], 'op': None}
+            ]}
         ]
-
 
         idl = Idl()
         ast = idl.parse(text)
         print(ast)
         self.assertEqual(expected_result, ast)
-
 
     def test_observable_completed(self):
         text = '-a-b-c--|'
 
         expected_result = [
-            { 'obs' : [
+            {'obs': [
                 [],
                 [ 
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'a'},
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'b'},
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'c'},
-                    {'ts': '-', 'item': None},
-                    {'ts': '-', 'item': None},
+                    {'ts': '-'},
+                    {'item': 'a'},
+                    {'ts': '-'},
+                    {'item': 'b'},
+                    {'ts': '-'},
+                    {'item': 'c'},
+                    {'ts': '-'},
+                    {'ts': '-'},
                 ],
                 '|'
-            ], 'op': None}
+            ]}
         ]
-
 
         idl = Idl()
         ast = idl.parse(text)
         print(ast)
         self.assertEqual(expected_result, ast)
 
-
     def test_observable_error(self):
         text = '-a-b-c--*'
 
         expected_result = [
-            { 'obs': [
+            {'obs': [
                 [],
                 [ 
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'a'},
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'b'},
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'c'},
-                    {'ts': '-', 'item': None},
-                    {'ts': '-', 'item': None},
+                    {'ts': '-'},
+                    {'item': 'a'},
+                    {'ts': '-'},
+                    {'item': 'b'},
+                    {'ts': '-'},
+                    {'item': 'c'},
+                    {'ts': '-'},
+                    {'ts': '-'},
                 ],
                 '*'
-            ], 'op': None}
+            ]}
         ]
 
         idl = Idl()
@@ -136,30 +132,29 @@ class TestIdl(unittest.TestCase):
 '''
 
         expected_result = [
-            { 'obs': [
+            {'obs': [
                 [],
                 [ 
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'a'},
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'b'},
-                    {'ts': '-', 'item': None},
+                    {'ts': '-'},
+                    {'item': 'a'},
+                    {'ts': '-'},
+                    {'item': 'b'},
+                    {'ts': '-'},
                 ],
                 '>'
-            ], 'op': None}, 
-            { 'obs': [
+            ]},
+            {'obs': [
                 [],
                 [ 
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': '1'},
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': '2'},
-                    {'ts': '-', 'item': None},
+                    {'ts': '-'},
+                    {'item': '1'},
+                    {'ts': '-'},
+                    {'item': '2'},
+                    {'ts': '-'},
                 ],
                 '>'
-            ], 'op': None}
+            ]}
         ]
-
 
         idl = Idl()
         ast = idl.parse(text)
@@ -169,14 +164,12 @@ class TestIdl(unittest.TestCase):
     def test_operator(self):
         text = '[ map(i: i*2) ]'
 
-        expected_result = [{ 'op': [
+        expected_result = [{'op': [
             '[',
             ' map(i: i*2) ',
             ']'
-            ],
-            'obs': None}
+            ]}
         ]
-
 
         idl = Idl()
         ast = idl.parse(text)
@@ -187,17 +180,16 @@ class TestIdl(unittest.TestCase):
         text = '-+->'
 
         expected_result = [
-            { 'obs' : [
+            {'obs': [
                 [],
                 [
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': '+'},
-                    {'ts': '-', 'item': None},
+                    {'ts': '-'},
+                    {'item': '+'},
+                    {'ts': '-'},
                 ],
                 '>'
-            ], 'op': None}
+            ]}
         ]
-
 
         idl = Idl()
         ast = idl.parse(text)
@@ -208,17 +200,16 @@ class TestIdl(unittest.TestCase):
         text = '+-a->'
 
         expected_result = [
-            { 'obs' : [
+            {'obs': [
                 [], '+',
                 [
-                    {'ts': '-', 'item': None},
-                    {'ts': None, 'item': 'a'},
-                    {'ts': '-', 'item': None},
+                    {'ts': '-'},
+                    {'item': 'a'},
+                    {'ts': '-'},
                 ],
                 '>'
-            ], 'op': None}
+            ]}
         ]
-
 
         idl = Idl()
         ast = idl.parse(text)

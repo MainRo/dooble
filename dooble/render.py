@@ -1,10 +1,10 @@
+from math import pi
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
-import numpy as np
 from dooble.marble import Operator, Observable, Item
 
-area = np.pi*100
-end_area = np.pi*50
+area = pi * 100
+end_area = pi * 50
 
 
 def render_to_file(marble, filename, theme):

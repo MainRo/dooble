@@ -93,17 +93,17 @@ The generated image looks like this:
 Full grammar
 ------------
 
-* Each text line represents either an observable, either an operator
+* Each text line represents either an observable, or an operator
 * Observables are defined with dash lines
 * If an Observable starts with a letter, this letter is considered as a label
 * Each character represent a time span
-* Character *|* indicates an observable completion
-* Character *\** indicates an observable error
-* Character *>* indicates an observable continutation
-* The *+* character is used to define anchors of higher order observables
-* operators start with a *[* and end with a *]*
+* Character ``|`` indicates an observable completion
+* Character ``*`` indicates an observable error
+* Character ``>`` indicates an observable continutation
+* The ``+`` character is used to define anchors of higher order observables
+* operators start with a ``[`` and end with a ``]``
 
-The full grammar is the following one (in tatsu peudo ebnf syntax):
+The full grammar is the following one (in tatsu pseudo ebnf syntax):
 
 .. code::
 
@@ -130,7 +130,7 @@ The full grammar is the following one (in tatsu peudo ebnf syntax):
         | item:item
         ;
 
-        completion = /[>|\*]/ ;
+        completion = /[>|*]/ ;
 
         skipspan = ' ' ;
         timespan = '-' ;

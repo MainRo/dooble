@@ -25,7 +25,7 @@ grammar = '''
     | item:item
     ;
 
-    completion = /[>|\*]/ ;
+    completion = /[>|*]/ ;
 
     skipspan = ' ' ;
     timespan = '-' ;

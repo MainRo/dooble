@@ -2,7 +2,7 @@ from collections import namedtuple
 
 Item = namedtuple('Item', ['item', 'at'])
 ObsItem = namedtuple('ObsItem', ['at'])
-Link = namedtuple('Link', [ 'from_x', 'from_y', 'to_x', 'to_y'])
+Link = namedtuple('Link', ['from_x', 'from_y', 'to_x', 'to_y'])
 
 
 class Observable(object):
