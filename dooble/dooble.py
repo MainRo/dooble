@@ -4,9 +4,10 @@ from dooble.marble import Marble, Observable, Operator
 
 Theme = namedtuple('Theme', [
     'timeline_color',
-    'emission_color',
     'item_color',
+    'item_link_color',
     'label_color',
+    'label_link_color',
     'operator_color',
     'operator_edge_color',
 ])
@@ -17,17 +18,22 @@ default_theme = Theme(
         float(0x7A) / 0xFF,
         float(0xB7) / 0xFF,
     ),
-    emission_color=(
-        float(0xC0) / 0xFF,
-        float(0xC0) / 0xFF,
-        float(0xC0) / 0xFF,
-    ),
     item_color=(
         float(0xE0) / 0xFF,
         float(0xE8) / 0xFF,
         float(0xFF) / 0xFF,
     ),
+    item_link_color=(
+        float(0xC0) / 0xFF,
+        float(0xC0) / 0xFF,
+        float(0xC0) / 0xFF,
+    ),
     label_color=(
+        float(0x33) / 0xFF,
+        float(0x7A) / 0xFF,
+        float(0xB7) / 0xFF,
+    ),
+    label_link_color=(
         float(0x33) / 0xFF,
         float(0x7A) / 0xFF,
         float(0xB7) / 0xFF,
