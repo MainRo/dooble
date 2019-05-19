@@ -13,7 +13,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'tatsu>=4.3',
-    'matplotlib>=2.2'
+    'matplotlib>=3.0'
 ]
 
 setup_requirements = [ ]
