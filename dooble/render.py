@@ -1,4 +1,6 @@
 from math import pi
+import matplotlib
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from dooble.marble import Operator, Observable, Item
