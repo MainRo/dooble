@@ -32,7 +32,7 @@ grammar = '''
     item = /[a-zA-Z0-9+.,]+/ ;
 
 
-    description = /[a-zA-Z0-9,:+*() <>_{}=-]+/ ;
+    description = /[a-zA-Z0-9,:+*() <>_{}=$\/-]+/ ;
 '''
 
 
