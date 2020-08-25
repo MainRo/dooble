@@ -22,7 +22,7 @@ def render_to_file(marble, filename, theme):
             [link.from_x, link.to_x],
             [plt_y(link.from_y), plt_y(link.to_y)],
             color=theme.timeline_color, linestyle='-',
-            linewidth='2', zorder=0)
+            linewidth=2, zorder=0)
 
     # item links
     for link in marble.item_links:
@@ -30,10 +30,10 @@ def render_to_file(marble, filename, theme):
             [link.from_x, link.to_x],
             [plt_y(link.from_y), plt_y(link.to_y)],
             color=theme.item_link_color, linestyle=':',
-            linewidth='1', zorder=0)
+            linewidth=1, zorder=0)
         ax.scatter(
             [link.to_x], [plt_y(link.to_y) + 0.3],
-            color=theme.item_link_color, marker='v', linewidth='1')
+            color=theme.item_link_color, marker='v', linewidth=1)
 
     # label links
     for link in marble.label_links:
@@ -41,10 +41,10 @@ def render_to_file(marble, filename, theme):
             [link.from_x, link.to_x],
             [plt_y(link.from_y), plt_y(link.to_y)],
             color=theme.label_link_color, linestyle='--',
-            linewidth='1', zorder=0)
+            linewidth=1, zorder=0)
         ax.scatter(
             [link.to_x], [plt_y(link.to_y) + 0.3],
-            color=theme.label_link_color, marker='v', linewidth='1')
+            color=theme.label_link_color, marker='v', linewidth=1)
 
     for layer_index, layer in enumerate(marble.layers):
         if type(layer) is Observable:
@@ -54,18 +54,18 @@ def render_to_file(marble, filename, theme):
                 [observable.start, observable.end],
                 [plt_y(layer_index), plt_y(layer_index)],
                 color=theme.timeline_color, linestyle='-',
-                linewidth='2',
+                linewidth=2,
                 zorder=0)
 
             # end marker
             if observable.completed is not None:
                 ax.scatter(
                     [observable.completed], [plt_y(layer_index)],
-                    s=end_area, color=theme.timeline_color, marker='|', linewidth='2')
+                    s=end_area, color=theme.timeline_color, marker='|', linewidth=2)
             elif observable.error is not None:
                 ax.scatter(
                     [observable.error], [plt_y(layer_index)], 
-                    s=end_area, color=theme.timeline_color, marker='x', linewidth='2')
+                    s=end_area, color=theme.timeline_color, marker='x', linewidth=2)
             else:
                 ax.scatter(
                     [observable.end], [plt_y(layer_index)],
@@ -77,7 +77,7 @@ def render_to_file(marble, filename, theme):
             for item in observable.items:
                 x.append(item.at)
                 y.append(plt_y(layer_index))
-            ax.scatter(x, y, s=area, c=None, edgecolors=theme.timeline_color, color=theme.item_color, alpha=1.0, linewidth='2')
+            ax.scatter(x, y, s=area, c=None, edgecolors=theme.timeline_color, color=theme.item_color, alpha=1.0, linewidth=2)
 
             # label
             if observable.label is not None:
@@ -85,7 +85,7 @@ def render_to_file(marble, filename, theme):
                     [observable.start], [plt_y(layer_index)], s=area, c=None, 
                     edgecolors=theme.operator_edge_color, 
                     color=theme.label_color, 
-                    alpha=1.0, linewidth='2')
+                    alpha=1.0, linewidth=2)
                 ax.text(observable.start, plt_y(layer_index), observable.label, horizontalalignment='center', verticalalignment='center')
 
             # items text
@@ -100,7 +100,7 @@ def render_to_file(marble, filename, theme):
                 (operator.start, y), operator.end-operator.start, 0.35,
                 alpha=1, edgecolor=theme.operator_edge_color,
                 facecolor=theme.operator_color,
-                linewidth='2'))
+                linewidth=2))
             ax.text(
                 operator.start + (operator.end-operator.start)/2, y + 0.15,
                 operator.text,
